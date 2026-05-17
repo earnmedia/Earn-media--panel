@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EarnMedia | Dynamic Tracking Network</title>
+    <title>Refer & Earn | EarnMedia</title>
     <style>
         * {
             margin: 0;
@@ -14,227 +14,515 @@
         }
 
         body {
-            background-color: #f1f3f4;
-            min-height: 100vh;
-            color: #202124;
+            background-color: #f4f6f9;
+            color: #1e293b;
+            padding: 12px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 15px;
+            align-items: flex-start;
+            min-height: 100vh;
         }
 
-        /* --- REDIRECT CARD INTERFACE --- */
-        .card {
+        .wrapper {
             background: #ffffff;
-            padding: 35px 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 410px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+            position: relative;
+            padding-bottom: 20px;
         }
 
-        .brand-logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: #0066cc;
-            margin-bottom: 25px;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-logo span { color: #34a853; }
-
-        .spinner {
-            border: 3.5px solid #f3f3f3;
-            border-top: 3.5px solid #0066cc;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 25px auto;
-        }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        h2 { font-size: 19px; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
-        p { font-size: 14px; color: #4b5563; margin-bottom: 30px; line-height: 1.6; }
-
-        .mobile-btn {
-            display: block;
-            background-color: #0066cc;
+        .top-banner {
+            background: #1a56db;
             color: #ffffff;
-            padding: 15px 20px;
-            text-decoration: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+            text-align: center;
+            padding: 14px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
         }
 
-        /* --- HIDDEN ADMIN PANEL --- */
-        .admin-panel {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            display: none; /* Hidden during regular link clicks */
-        }
-
-        .admin-header {
-            font-size: 20px;
+        .badge-limited {
+            background: #f59e0b;
+            color: #000;
             font-weight: 700;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f1f3f4;
-            padding-bottom: 10px;
-            color: #111827;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #4b5563;
+            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            position: absolute;
+            right: 16px;
+            bottom: -15px;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
             text-transform: uppercase;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1.5px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
+        .content-body {
+            padding: 30px 16px 16px 16px;
+            text-align: center;
         }
 
-        input:focus { border-color: #0066cc; }
+        h2.main-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
 
-        .save-btn {
+        p.sub-title {
+            font-size: 13.5px;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        h3.campaign-name {
+            font-size: 17px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .main-payout {
+            font-size: 44px;
+            font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+
+        .accordion-btn {
             width: 100%;
-            background: #34a853;
-            color: white;
+            background: #f1f5f9;
+            color: #2563eb;
             border: none;
-            padding: 14px;
-            border-radius: 10px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .accordion-icon {
+            font-size: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .custom-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            text-align: left;
+            display: block; 
+        }
+
+        .custom-box h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .input-block { margin-bottom: 12px; }
+        .input-block label { display: block; font-size: 13px; font-weight: 500; color: #475569; margin-bottom: 4px; }
+        
+        .input-wrapper {
+            position: relative;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 10px;
             font-size: 15px;
             font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
+            text-align: center;
+            border-radius: 8px;
         }
 
-        .payout-badge {
-            background: #e6f4ea;
-            color: #137333;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
+        .currency-symbol {
+            position: absolute;
+            left: 12px;
+            top: 9px;
+            color: #64748b;
             font-weight: 600;
-            display: inline-block;
-            margin-bottom: 15px;
+        }
+
+        .total-row {
+            text-align: center;
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 14px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 10px;
+            margin-top: 14px;
+        }
+
+        .action-input-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            margin-bottom: 12px;
+            height: 52px;
+        }
+
+        .action-input-box svg {
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .action-input-box input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #0f172a;
+        }
+
+        .optional-label {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        .submit-gen-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            height: 52px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            margin-top: 16px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .result-box {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            padding: 14px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: left;
+            word-break: break-all;
+            display: none;
+        }
+
+        .visitor-redirecting {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2563eb;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .leads-dashboard {
+            margin-top: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .leads-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .lead-item {
+            background: white;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+            font-size: 12px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
 <body>
 
-    <div id="redirect-view" class="card">
-        <div class="brand-logo">Earn<span>Media</span></div>
-        <div id="payout-container" style="display:none;">
-            <div class="payout-badge">Estimated Payout: <span id="payout-val">$0.00</span></div>
-        </div>
-        <div class="spinner"></div>
-        <h2>Verifying Campaign Link...</h2>
-        <p>Please wait while our routing panel registers your referral parameters.</p>
-        <a id="target-link" href="#" class="mobile-btn">Tap here if not redirected</a>
-    </div>
-
-    <div id="admin-view" class="admin-panel">
-        <div class="admin-header">⚙️ Campaign Payout Dashboard</div>
-        
-        <div class="form-group">
-            <label>Campaign Offer ID 57 Link</label>
-            <input type="text" id="link-57" placeholder="https://...">
-        </div>
-        <div class="form-group">
-            <label>Offer 57 Payout Rate</label>
-            <input type="text" id="payout-57" placeholder="e.g., $1.50 or ₹50">
+    <div class="wrapper">
+        <div class="top-banner">
+            Refer & Earn Program
+            <div class="badge-limited">Limited Time</div>
         </div>
 
-        <hr style="margin:20px 0; border:0; border-top:1px solid #e5e7eb;">
+        <div class="content-body">
+            <h2 class="main-title">Refer Friends & Earn Cashback</h2>
+            <p class="sub-title" id="page-subtitle">Get instant cashback for every successful referral</p>
 
-        <div class="form-group">
-            <label>Default Fallback Website Link</label>
-            <input type="text" id="link-default" placeholder="https://...">
+            <h3 class="campaign-name">Found it</h3>
+            
+            <div class="main-payout">₹ <span id="display-main-payout">35</span></div>
+
+            <button class="accordion-btn" id="drawer-toggle-btn" onclick="toggleAccordion()">
+                <span>Customize Payout</span>
+                <span id="arrow" class="accordion-icon">▼</span>
+            </button>
+
+            <div id="custom-panel" class="custom-box">
+                <h4>trade</h4>
+                <div class="input-block">
+                    <label>User Amount:</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">₹</span>
+                        <input type="number" id="user-amount" oninput="balancePayoutFields(this, 'user')">
+                    </div>
+                </div>
+                <div class="input-block" style="margin-top: 14px;">
+                    <label>Referral Amount:</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">₹</span>
+                        <input type="number" id="referral-amount" oninput="balancePayoutFields(this, 'referral')">
+                    </div>
+                </div>
+                <div class="total-row">Total Payout: ₹<span id="box-total">35</span></div>
+            </div>
+
+            <div id="setup-form-block">
+                <div class="action-input-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                    <input type="text" id="input-upi" placeholder="Enter Your UPI ID (Mandatory)">
+                </div>
+
+                <div class="action-input-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <input type="text" id="input-telegram" placeholder="Enter Telegram Link">
+                    <span class="optional-label">(Optional)</span>
+                </div>
+
+                <button class="submit-gen-btn" onclick="generateCampaignLink()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"></path></svg>
+                    Submit & Get Link
+                </button>
+
+                <div class="leads-dashboard" id="promoter-monitor" style="display:none;">
+                    <div class="leads-title">
+                        <span>📈 Your Live Link Clicks / Traffic:</span>
+                        <span style="color:#1a56db; font-size:12px; cursor:pointer;" onclick="clearTrackerData()">Clear Logs</span>
+                    </div>
+                    <div id="leads-list-container">
+                        <div style="font-size:12px; color:#64748b;">No active clicks logged yet. Share your link to track live users.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="visitor-action-block" style="display: none;">
+                <div class="visitor-redirecting" id="visitor-payout-msg">Enter your UPI to receive cashback:</div>
+                
+                <div class="action-input-box" style="border: 1px solid #2563eb; background: #fff;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                    <input type="text" id="visitor-upi" placeholder="Enter Your Payout UPI ID">
+                </div>
+
+                <button class="submit-gen-btn" id="final-redirect-btn" onclick="redirectToOffer()">
+                    Proceed to Task & Earn
+                </button>
+            </div>
+
+            <div id="output-panel" class="result-box">
+                <strong style="color: #065f46; font-size: 13px;">Your Customized Campaign Share URL:</strong>
+                <p id="generated-url" style="color: #047857; font-weight: 600; margin-top: 5px; font-size: 13px; font-family: monospace;"></p>
+                <button class="submit-gen-btn" style="background:#059669; height:40px; margin-top:10px; font-size:13px;" onclick="copyGeneratedLink()">Copy Custom URL</button>
+            </div>
         </div>
-
-        <button class="save-btn" onclick="saveSettings()">Save Configuration</button>
     </div>
 
     <script>
-        // --- DATA BACKEND (Uses Browser Local Storage) ---
-        const defaultData = {
-            link57: "https://www.google.com",
-            payout57: "$0.50",
-            linkDefault: "https://earnmedia.in"
+        // ========================================================
+        // ⚙️ MANAGE ALL NUMBERS & TRACKING FROM THIS CONFIG BOX:
+        // ========================================================
+        const MY_CONFIG = {
+            earnMediaAffiliateLink: "https://partner.earnmedia.in/refer/?o=76&pid=67&cid=69fffcfccd0ae", 
+            offerPool: 35 
         };
+        // ========================================================
 
-        // Load stored parameters or use defaults
-        let appData = JSON.parse(localStorage.getItem('earnmedia_config')) || defaultData;
+        // 1. Core Structural UI Fallback Functions (Placed first to handle loading errors)
+        function toggleAccordion() {
+            const el = document.getElementById('custom-panel');
+            const arrow = document.getElementById('arrow');
+            if(el.style.display === "none") {
+                el.style.display = "block";
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                el.style.display = "none";
+                arrow.style.transform = "rotate(0deg)";
+            }
+        }
 
-        // Parse Browser Path Variables
-        const params = new URLSearchParams(window.location.search);
-        const campaignId = params.get('o');
-        const isAdmin = params.get('admin');
+        function balancePayoutFields(input, fieldSource) {
+            let userVal = parseInt(input.value) || 0;
+            if(userVal > MY_CONFIG.offerPool) { userVal = MY_CONFIG.offerPool; input.value = MY_CONFIG.offerPool; }
 
-        // ROUTING SYSTEM LAYER
-        if (isAdmin === "true") {
-            // Display Admin Panel Setup
-            document.getElementById('redirect-view').style.display = 'none';
-            document.getElementById('admin-view').style.display = 'block';
-            
-            // Populate Input Forms
-            document.getElementById('link-57').value = appData.link57;
-            document.getElementById('payout-57').value = appData.payout57;
-            document.getElementById('link-default').value = appData.linkDefault;
-        } else {
-            // Process Live Referral Traffic
-            let destination = appData.linkDefault;
+            const userField = document.getElementById('user-amount');
+            const refField = document.getElementById('referral-amount');
 
-            if (campaignId === "57") {
-                destination = appData.link57;
-                // Show Custom Payout configuration on screen if active
-                if(appData.payout57) {
-                    document.getElementById('payout-val').innerText = appData.payout57;
-                    document.getElementById('payout-container').style.display = 'block';
-                }
+            if(fieldSource === 'user') {
+                refField.value = MY_CONFIG.offerPool - userVal;
+            } else {
+                userField.value = MY_CONFIG.offerPool - userVal;
+            }
+        }
+
+        function generateCampaignLink() {
+            const upi = document.getElementById('input-upi').value.trim();
+            const telegram = document.getElementById('input-telegram').value.trim();
+            const userAmt = document.getElementById('user-amount').value;
+            const refAmt = document.getElementById('referral-amount').value;
+
+            if(!upi) {
+                alert("Please enter your UPI ID.");
+                return;
             }
 
-            // Assign Fallback Button URL Path
-            document.getElementById('target-link').href = destination;
+            localStorage.setItem('my_promoter_id', upi);
+            renderPromoterLeads(upi);
 
-            // Execute Device Redirect Actions
-            setTimeout(() => {
-                window.location.replace(destination);
-            }, 2000);
+            const baseWebUrl = window.location.origin + window.location.pathname;
+            let trackingParams = `?o=57&uAmt=${userAmt}&rAmt=${refAmt}&promoterUpi=${encodeURIComponent(upi)}`;
+            if(telegram) {
+                trackingParams += `&tg=${encodeURIComponent(telegram)}`;
+            }
+
+            const finalGeneratedLandingLink = baseWebUrl + trackingParams;
+            document.getElementById('generated-url').innerText = finalGeneratedLandingLink;
+            document.getElementById('output-panel').style.display = 'block';
+            
+            alert("Custom Link Generated Successfully!");
         }
 
-        // CONTROL PANEL SAVE FUNCTION
-        function saveSettings() {
-            const updatedData = {
-                link57: document.getElementById('link-57').value || defaultData.link57,
-                payout57: document.getElementById('payout-57').value || "",
-                linkDefault: document.getElementById('link-default').value || defaultData.linkDefault
-            };
-
-            localStorage.setItem('earnmedia_config', JSON.stringify(updatedData));
-            alert("Configuration settings updated completely! Reloading...");
-            window.location.href = window.location.pathname;
+        function copyGeneratedLink() {
+            const linkText = document.getElementById('generated-url').innerText;
+            navigator.clipboard.writeText(linkText);
+            alert("Link copied successfully!");
         }
-    </script>
-</body>
-</html>
+
+        function renderPromoterLeads(promoterUpi) {
+            document.getElementById('promoter-monitor').style.display = 'block';
+            const logStorageKey = `clicks_${promoterUpi}`;
+            const activeLogs = JSON.parse(localStorage.getItem(logStorageKey)) || [];
+            const container = document.getElementById('leads-list-container');
+
+            if(activeLogs.length > 0) {
+                container.innerHTML = '';
+                activeLogs.reverse().forEach(log => {
+                    container.innerHTML += `
+                        <div class="lead-item">
+                            <span>👤 ${log.visitorUpi || 'Incomplete Input'}</span>
+                            <span style="color:#d97706; font-weight:600;">${log.status}</span>
+                            <span style="color:#94a3b8;">${log.time}</span>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        function clearTrackerData() {
+            const myUpi = localStorage.getItem('my_promoter_id');
+            if(myUpi) {
+                localStorage.removeItem(`clicks_${myUpi}`);
+                location.reload();
+            }
+        }
+
+        let globalParams = {};
+
+        // 2. AUTOMATED POOL MANAGER ON WINDOW LOAD
+        window.onload = function() {
+            const urlSearchArgs = new URLSearchParams(window.location.search);
+            
+            // Sync config definitions down into layout elements
+            document.getElementById('display-main-payout').innerText = MY_CONFIG.offerPool;
+            document.getElementById('box-total').innerText = MY_CONFIG.offerPool;
+
+            // Compute default automatic ratio splits (60% / 40%)
+            const autoUserAmt = Math.round(MY_CONFIG.offerPool * 0.6);
+            const autoRefAmt = MY_CONFIG.offerPool - autoUserAmt;
+
+            const savedPromoter = localStorage.getItem('my_promoter_id');
+            if(savedPromoter && !urlSearchArgs.has('promoterUpi')) {
+                document.getElementById('input-upi').value = savedPromoter;
+                renderPromoterLeads(savedPromoter);
+            }
+
+            if(urlSearchArgs.has('uAmt') && urlSearchArgs.has('promoterUpi')) {
+                document.getElementById('setup-form-block').style.display = 'none';
+                document.getElementById('drawer-toggle-btn').style.display = 'none';
+
+                globalParams.customUserSplit = urlSearchArgs.get('uAmt');
+                globalParams.customRefSplit = urlSearchArgs.get('rAmt');
+                globalParams.promoterUpi = urlSearchArgs.get('promoterUpi');
+
+                document.getElementById('custom-panel').style.display = 'block';
+                document.getElementById('user-amount').value = globalParams.customUserSplit;
+                document.getElementById('referral-amount').value = globalParams.customRefSplit;
+                document.getElementById('user-amount').disabled = true;
+                document.getElementById('referral-amount').disabled = true;
+
+                document.getElementById('page-subtitle').innerText = `Complete the task to grab your ₹${globalParams.customUserSplit} cashback!`;
+                document.getElementById('visitor-payout-msg').innerText = `Enter your UPI ID to claim your ₹${globalParams.customUserSplit} reward:`;
+                
+                document.getElementById('visitor-action-block').style.display = 'block';
+            } else {
+                // Creation defaults loaded instantly
+                document.getElementById('user-amount').value = autoUserAmt;
+                document.getElementById('referral-amount').value = autoRefAmt;
+                
+                // Hide drawer preview for dynamic screen safety until customized
+                document.getElementById('custom-panel').style.display = 'none';
+            }
+        }
+
+        function redirectToOffer() {
+            const visitorUpi = document.getElementById('visitor-upi').value.trim();
+
+            if(!visitorUpi) {
+                alert("Please enter your UPI ID first.");
+                return;
+            }
+
+            const logStorageKey = `clicks_${globalParams.promoterUpi}`;
+            const existingLogs = JSON.parse(localStorage.getItem(logStorageKey)) || [];
+            const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            existingLogs.push({
+                visitorUpi: visitorUpi,
+                status: "Clicked / Pending",
+                time: currentTime
+            });
+            
+            localStorage.setItem(logStorageKey, JSON.stringify(existingLogs));
+
+            const doubleTrackingToken = `${globalParams.promoterUpi}_R${globalParams.customRefSplit}_${visitorUpi}_U${globalParams.customUserSplit}`;
+            
+            let finalEarnMediaLink = MY_CONFIG.earnMediaAffiliateLink;
+            const connector = finalEarnMedi
