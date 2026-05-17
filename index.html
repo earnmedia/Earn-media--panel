@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- CRITICAL FOR MOBILE: Forces the page to scale correctly on phone screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EarnMedia Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Removes the blue flash when tapping on mobile */
+        }
+
+        body {
+            background-color: #f1f3f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #202124;
+            padding: 15px; /* Adds spacing on mobile edges */
+        }
+
+        .mobile-card {
+            background: #ffffff;
+            padding: 35px 20px;
+            border-radius: 16px; /* Smooth rounded corners for modern mobile UI */
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            text-align: center;
+            width: 100%;
+            max-width: 400px; /* Perfect sizing for iPhone and Android screens */
+        }
+
+        .brand-logo {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0066cc;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo span {
+            color: #34a853;
+        }
+
+        /* Mobile-optimized smooth loading spinner */
+        .spinner {
+            border: 3.5px solid #f3f3f3;
+            border-top: 3.5px solid #0066cc;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 25px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h2 {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1f2937;
+        }
+
+        p {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        /* Large, easy-to-tap button for mobile thumbs */
+        .mobile-btn {
+            display: block;
+            background-color: #0066cc;
+            color: #ffffff;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+        }
+
+        .mobile-btn:active {
+            background-color: #004ea3; /* Visual feedback when pressed on mobile */
+        }
+
+        .footer {
+            margin-top: 35px;
+            font-size: 11px;
+            color: #9ca3af;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-card">
+        <!-- Main Panel Header -->
+        <div class="brand-logo">Earn<span>Media</span></div>
+        
+        <!-- Loading Indicator -->
+        <div class="spinner"></div>
+
+        <h2>Verifying Campaign Link...</h2>
+        <p>Please wait a moment while our system checks your referral details and routes your connection.</p>
+
+        <!-- Tap target for manual override -->
+        <a id="target-link" href="https://earnmedia.in" class="mobile-btn">Tap here if not redirected</a>
+
+        <div class="footer">
+            Secure Tracking Redirect &bull; &copy; 2026
+        </div>
+    </div>
+
+    <script>
+        // MOBILE REDIRECT & TRACKING LOGIC
+        
+        // 1. Extract the offer parameter (e.g., ?o=57)
+        const params = new URLSearchParams(window.location.search);
+        const campaignId = params.get('o');
+
+        // 2. Map of campaigns (Put your actual destination tracking links here)
+        const networks = {
+            "57": "https://www.google.com",  // Test path for 57
+            "58": "https://www.amazon.com"   // Test path for 58
+        };
+
+        // Default link if 'o' is empty, invalid, or missing
+        let finalUrl = "https://earnmedia.in";
+
+        if (campaignId && networks[campaignId]) {
+            finalUrl = networks[campaignId];
+        }
+
+        // 3. Update the mobile button right away
+        document.getElementById('target-link').href = finalUrl;
+
+        // 4. Clean, hyper-fast redirect method for mobile browsers
+        // Using location.replace handles mobile history better (pressing "back" won't trap the user)
+        setTimeout(() => {
+            window.location.replace(finalUrl);
+        }, 1500); // 1.5 second delay so the user sees the professional loading animation
+    </script>
+
+</body>
+</html>
