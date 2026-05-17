@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- CRITICAL FOR MOBILE: Forces the page to scale correctly on phone screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EarnMedia Panel</title>
+    <title>EarnMedia | Dynamic Tracking Network</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Removes the blue flash when tapping on mobile */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: #f1f3f4;
+            min-height: 100vh;
+            color: #202124;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: #202124;
-            padding: 15px; /* Adds spacing on mobile edges */
+            padding: 15px;
         }
 
-        .mobile-card {
+        /* --- REDIRECT CARD INTERFACE --- */
+        .card {
             background: #ffffff;
             padding: 35px 20px;
-            border-radius: 16px; /* Smooth rounded corners for modern mobile UI */
+            border-radius: 16px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
             text-align: center;
             width: 100%;
-            max-width: 400px; /* Perfect sizing for iPhone and Android screens */
+            max-width: 400px;
         }
 
         .brand-logo {
@@ -42,11 +42,8 @@
             letter-spacing: -0.5px;
         }
 
-        .brand-logo span {
-            color: #34a853;
-        }
+        .brand-logo span { color: #34a853; }
 
-        /* Mobile-optimized smooth loading spinner */
         .spinner {
             border: 3.5px solid #f3f3f3;
             border-top: 3.5px solid #0066cc;
@@ -57,27 +54,10 @@
             margin: 0 auto 25px auto;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h2 { font-size: 19px; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+        p { font-size: 14px; color: #4b5563; margin-bottom: 30px; line-height: 1.6; }
 
-        h2 {
-            font-size: 19px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #1f2937;
-        }
-
-        p {
-            font-size: 14px;
-            color: #4b5563;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            padding: 0 10px;
-        }
-
-        /* Large, easy-to-tap button for mobile thumbs */
         .mobile-btn {
             display: block;
             background-color: #0066cc;
@@ -87,71 +67,174 @@
             border-radius: 12px;
             font-size: 15px;
             font-weight: 600;
-            transition: background-color 0.2s ease;
             box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
         }
 
-        .mobile-btn:active {
-            background-color: #004ea3; /* Visual feedback when pressed on mobile */
+        /* --- HIDDEN ADMIN PANEL --- */
+        .admin-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: none; /* Hidden during regular link clicks */
         }
 
-        .footer {
-            margin-top: 35px;
-            font-size: 11px;
-            color: #9ca3af;
-            letter-spacing: 0.3px;
+        .admin-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f1f3f4;
+            padding-bottom: 10px;
+            color: #111827;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #4b5563;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus { border-color: #0066cc; }
+
+        .save-btn {
+            width: 100%;
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .payout-badge {
+            background: #e6f4ea;
+            color: #137333;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="mobile-card">
-        <!-- Main Panel Header -->
+    <div id="redirect-view" class="card">
         <div class="brand-logo">Earn<span>Media</span></div>
-        
-        <!-- Loading Indicator -->
-        <div class="spinner"></div>
-
-        <h2>Verifying Campaign Link...</h2>
-        <p>Please wait a moment while our system checks your referral details and routes your connection.</p>
-
-        <!-- Tap target for manual override -->
-        <a id="target-link" href="https://earnmedia.in" class="mobile-btn">Tap here if not redirected</a>
-
-        <div class="footer">
-            Secure Tracking Redirect &bull; &copy; 2026
+        <div id="payout-container" style="display:none;">
+            <div class="payout-badge">Estimated Payout: <span id="payout-val">$0.00</span></div>
         </div>
+        <div class="spinner"></div>
+        <h2>Verifying Campaign Link...</h2>
+        <p>Please wait while our routing panel registers your referral parameters.</p>
+        <a id="target-link" href="#" class="mobile-btn">Tap here if not redirected</a>
+    </div>
+
+    <div id="admin-view" class="admin-panel">
+        <div class="admin-header">⚙️ Campaign Payout Dashboard</div>
+        
+        <div class="form-group">
+            <label>Campaign Offer ID 57 Link</label>
+            <input type="text" id="link-57" placeholder="https://...">
+        </div>
+        <div class="form-group">
+            <label>Offer 57 Payout Rate</label>
+            <input type="text" id="payout-57" placeholder="e.g., $1.50 or ₹50">
+        </div>
+
+        <hr style="margin:20px 0; border:0; border-top:1px solid #e5e7eb;">
+
+        <div class="form-group">
+            <label>Default Fallback Website Link</label>
+            <input type="text" id="link-default" placeholder="https://...">
+        </div>
+
+        <button class="save-btn" onclick="saveSettings()">Save Configuration</button>
     </div>
 
     <script>
-        // MOBILE REDIRECT & TRACKING LOGIC
-        
-        // 1. Extract the offer parameter (e.g., ?o=57)
-        const params = new URLSearchParams(window.location.search);
-        const campaignId = params.get('o');
-
-        // 2. Map of campaigns (Put your actual destination tracking links here)
-        const networks = {
-            "57": "https://partner.earnmedia.in/refer/?o=76&pid=67&cid=69fffcfccd0ae",  // Test path for 57
-            "58": "https://www.amazon.com"   // Test path for 58
+        // --- DATA BACKEND (Uses Browser Local Storage) ---
+        const defaultData = {
+            link57: "https://www.google.com",
+            payout57: "$0.50",
+            linkDefault: "https://earnmedia.in"
         };
 
-        // Default link if 'o' is empty, invalid, or missing
-        let finalUrl = "https://earnmedia.in";
+        // Load stored parameters or use defaults
+        let appData = JSON.parse(localStorage.getItem('earnmedia_config')) || defaultData;
 
-        if (campaignId && networks[campaignId]) {
-            finalUrl = networks[campaignId];
+        // Parse Browser Path Variables
+        const params = new URLSearchParams(window.location.search);
+        const campaignId = params.get('o');
+        const isAdmin = params.get('admin');
+
+        // ROUTING SYSTEM LAYER
+        if (isAdmin === "true") {
+            // Display Admin Panel Setup
+            document.getElementById('redirect-view').style.display = 'none';
+            document.getElementById('admin-view').style.display = 'block';
+            
+            // Populate Input Forms
+            document.getElementById('link-57').value = appData.link57;
+            document.getElementById('payout-57').value = appData.payout57;
+            document.getElementById('link-default').value = appData.linkDefault;
+        } else {
+            // Process Live Referral Traffic
+            let destination = appData.linkDefault;
+
+            if (campaignId === "57") {
+                destination = appData.link57;
+                // Show Custom Payout configuration on screen if active
+                if(appData.payout57) {
+                    document.getElementById('payout-val').innerText = appData.payout57;
+                    document.getElementById('payout-container').style.display = 'block';
+                }
+            }
+
+            // Assign Fallback Button URL Path
+            document.getElementById('target-link').href = destination;
+
+            // Execute Device Redirect Actions
+            setTimeout(() => {
+                window.location.replace(destination);
+            }, 2000);
         }
 
-        // 3. Update the mobile button right away
-        document.getElementById('target-link').href = finalUrl;
+        // CONTROL PANEL SAVE FUNCTION
+        function saveSettings() {
+            const updatedData = {
+                link57: document.getElementById('link-57').value || defaultData.link57,
+                payout57: document.getElementById('payout-57').value || "",
+                linkDefault: document.getElementById('link-default').value || defaultData.linkDefault
+            };
 
-        // 4. Clean, hyper-fast redirect method for mobile browsers
-        // Using location.replace handles mobile history better (pressing "back" won't trap the user)
-        setTimeout(() => {
-            window.location.replace(finalUrl);
-        }, 1500); // 1.5 second delay so the user sees the professional loading animation
+            localStorage.setItem('earnmedia_config', JSON.stringify(updatedData));
+            alert("Configuration settings updated completely! Reloading...");
+            window.location.href = window.location.pathname;
+        }
     </script>
-
 </body>
 </html>
