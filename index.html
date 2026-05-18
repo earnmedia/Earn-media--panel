@@ -2,320 +2,185 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Refer & Earn | EarnMedia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your Reward</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            -webkit-tap-highlight-color: transparent;
+        :root {
+            --bg-gradient: linear-gradient(135deg, #020617 0%, #0b1329 50%, #0f172a 100%);
+            --card-gradient: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            --input-bg: #090d16;
+            --primary-gradient: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+            --primary: #3b82f6;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border: rgba(51, 65, 85, 0.6);
         }
 
-        body {
-            background-color: #f4f6f9;
-            color: #1e293b;
-            padding: 12px;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { 
+            background: var(--bg-gradient); 
+            color: var(--text-main); 
+            padding: 15px; 
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
+            align-items: center;
         }
 
-        .wrapper {
-            background: #ffffff;
-            width: 100%;
-            max-width: 410px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
-            position: relative;
-            padding-bottom: 20px;
-        }
+        .container { max-width: 450px; width: 100%; }
 
-        .top-banner {
-            background: #1a56db;
-            color: #ffffff;
-            text-align: center;
-            padding: 14px 10px;
-            font-size: 13px;
-            font-weight: 500;
-            position: relative;
-        }
-
-        .badge-limited {
-            background: #f59e0b;
-            color: #000;
-            font-weight: 700;
-            font-size: 11px;
-            padding: 6px 14px;
+        .card {
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
             border-radius: 20px;
-            position: absolute;
-            right: 16px;
-            bottom: -15px;
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+            padding: 25px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .exclusive-badge {
+            background: #2563eb;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
             text-transform: uppercase;
         }
 
-        .content-body {
-            padding: 30px 16px 16px 16px;
+        .reward-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
             text-align: center;
-        }
-
-        h2.main-title {
-            font-size: 19px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-
-        p.sub-title {
-            font-size: 13.5px;
-            color: #64748b;
-            line-height: 1.5;
-            margin-bottom: 24px;
-        }
-
-        .main-payout {
-            font-size: 44px;
-            font-weight: 800;
-            color: #2563eb;
             margin-bottom: 20px;
         }
+        .reward-box p { color: var(--text-sub); font-size: 14px; }
+        .reward-box h2 { font-size: 32px; color: #3b82f6; margin-top: 5px; }
 
-        .accordion-btn {
-            width: 100%;
-            background: #f1f5f9;
-            color: #2563eb;
-            border: none;
-            padding: 14px 16px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            margin-bottom: 12px;
-        }
-
-        .custom-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 14px;
-            text-align: left;
-        }
-
-        .input-block { margin-bottom: 12px; }
-        .input-block label { display: block; font-size: 13px; font-weight: 500; color: #475569; margin-bottom: 4px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
         
-        .input-wrapper {
-            position: relative;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-        }
-
-        .input-wrapper input {
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper i { position: absolute; left: 15px; color: var(--text-sub); }
+        
+        .form-group input {
             width: 100%;
-            border: none;
-            outline: none;
-            padding: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            text-align: center;
-            border-radius: 8px;
-        }
-
-        .currency-symbol {
-            position: absolute;
-            left: 12px;
-            top: 9px;
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        .action-input-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            padding: 14px 14px 14px 45px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            padding: 0 14px;
-            margin-bottom: 12px;
-            height: 52px;
-        }
-
-        .action-input-box input {
-            width: 100%;
-            border: none;
-            background: transparent;
+            color: var(--text-main);
+            font-size: 15px;
             outline: none;
-            font-size: 14px;
-            color: #0f172a;
         }
+        .form-group input:focus { border-color: var(--primary); }
 
-        .submit-gen-btn {
-            width: 100%;
-            background: #2563eb;
+        .btn {
+            background: var(--primary-gradient);
             color: white;
             border: none;
+            padding: 15px;
+            width: 100%;
             border-radius: 12px;
-            height: 52px;
-            font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 16px;
             cursor: pointer;
-            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
-        .result-box {
-            background: #ecfdf5;
-            border: 1px solid #a7f3d0;
-            padding: 14px;
-            border-radius: 12px;
-            margin-top: 15px;
-            text-align: left;
-            word-break: break-all;
+        .loader-box { display: none; text-align: center; padding: 20px; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid #1e293b; border-top: 4px solid var(--primary);
+            border-radius: 50%; animation: spin 1s linear infinite;
+            margin: 15px auto;
         }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <div class="top-banner">Refer & Earn Program</div>
-        <div class="content-body">
-            <h2 class="main-title">Found It</h2>
-            <div class="main-payout">₹ <span id="display-main-payout">340</span></div>
+    <div class="container">
+        <div class="card">
+            
+            <div id="formSection" style="text-align: center;">
+                <span class="exclusive-badge">Exclusive Offer</span>
+                
+                <div class="reward-box">
+                    <p>Your Cashback Reward</p>
+                    <h2>₹15.00</h2>
+                </div>
 
-            <div id="custom-panel" class="custom-box">
-                <div class="input-block">
-                    <label>User Amount:</label>
-                    <div class="input-wrapper">
-                        <span class="currency-symbol">₹</span>
-                        <input type="number" id="user-amount" oninput="balancePayoutFields(this, 'user')">
+                <form onsubmit="processBypass(event)" style="text-align: left;">
+                    <div class="form-group">
+                        <label>Enter Your UPI ID</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-bank"></i>
+                            <input type="text" id="upiId" placeholder="yourname@upi" required>
+                        </div>
                     </div>
-                </div>
-                <div class="input-block" style="margin-top: 14px;">
-                    <label>Referral Amount:</label>
-                    <div class="input-wrapper">
-                        <span class="currency-symbol">₹</span>
-                        <input type="number" id="referral-amount" oninput="balancePayoutFields(this, 'referral')">
+
+                    <div class="form-group">
+                        <label>Telegram Channel (Optional)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-brands fa-telegram"></i>
+                            <input type="text" id="telegramChannel" placeholder="Telegram Channel Url">
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <label>Telegram Name (Optional)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-brands fa-telegram"></i>
+                            <input type="text" id="telegramName" placeholder="Your Telegram Username">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        Rs CLAIM YOUR ₹15.00 <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
             </div>
 
-            <div id="setup-form-block">
-                <div class="action-input-box">
-                    <input type="text" id="input-upi" placeholder="Enter Your UPI ID (Mandatory)">
-                </div>
-                <button class="submit-gen-btn" onclick="generateCampaignLink()">Submit & Get Link</button>
+            <div id="loadingSection" class="loader-box">
+                <h2>Verifying Security Tokens...</h2>
+                <p style="color: var(--text-sub); font-size: 13px; margin-top: 5px;">Bypassing unverified core network node. Please wait.</p>
+                <div class="spinner"></div>
             </div>
 
-            <div id="visitor-action-block" style="display: none;">
-                <div class="action-input-box" style="border: 1px solid #2563eb;">
-                    <input type="text" id="visitor-upi" placeholder="Enter Your Payout UPI ID *">
-                </div>
-                <button class="submit-gen-btn" style="background:#10b981;" onclick="redirectToOffer()">Proceed to Task & Earn</button>
-            </div>
-
-            <div id="output-panel" class="result-box" style="display:none;">
-                <strong style="color: #065f46; font-size: 13px;">Your Customized Campaign Share URL:</strong>
-                <p id="generated-url" style="color: #047857; font-weight: 600; margin-top: 5px; font-size: 13px; font-family: monospace;"></p>
-                <button class="submit-gen-btn" style="background:#059669; height:40px; margin-top:10px;" onclick="copyGeneratedLink()">Copy Custom URL</button>
-            </div>
         </div>
     </div>
 
     <script>
-        // ========================================================
-        // ⚙️ CONFIGURATION: APNI DETAILS YAHAN DALEN
-        // ========================================================
-        const MY_CONFIG = {
-            // ⚠️ APNI DASHBOARD KI REAL ORIGINAL EMBED LINK YAHAN DALEN
-            earnMediaAffiliateLink: "https://partner.earnmedia.in/refer/?o=76&pid=67&cid=69fffcfccd0ae", 
-            offerPool: 35 
-        };
-        // ========================================================
+        function processBypass(event) {
+            event.preventDefault(); // Default submission block karna
 
-        function balancePayoutFields(input, fieldSource) {
-            let userVal = parseInt(input.value) || 0;
-            if(userVal > MY_CONFIG.offerPool) { userVal = MY_CONFIG.offerPool; input.value = MY_CONFIG.offerPool; }
-            const userField = document.getElementById('user-amount');
-            const refField = document.getElementById('referral-amount');
-            if(fieldSource === 'user') { refField.value = MY_CONFIG.offerPool - userVal; } 
-            else { userField.value = MY_CONFIG.offerPool - userVal; }
-        }
+            const upi = document.getElementById('upiId').value.trim();
+            const tgName = document.getElementById('telegramName').value.trim() || "none";
 
-        // USER A KE LIYE SAFE LINK GENERATION ENGINE
-        function generateCampaignLink() {
-            const upi = document.getElementById('input-upi').value.trim();
-            const userAmt = document.getElementById('user-amount').value;
-            const refAmt = document.getElementById('referral-amount').value;
+            // Show Loading Animation
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('loadingSection').style.display = 'block';
 
-            if(!upi) { alert("Please enter your UPI ID."); return; }
-
-            // ⚠️ MOBILE LOCAL DRIVES COMPATIBILITY FIX
-            let currentLiveUrl = window.location.href.split('?')[0];
-            if(currentLiveUrl.startsWith('content://') || currentLiveUrl.startsWith('file://')) {
-                currentLiveUrl = "https://earnmedia.github.io/Earn-media--panel/";
-            }
-
-            const finalGeneratedLandingLink = `${currentLiveUrl}?uAmt=${userAmt}&rAmt=${refAmt}&promoterUpi=${encodeURIComponent(upi)}`;
+            // Core Mapping Link Injection (Internal Assembly)
+            const baseLink = "https://partner.earnmedia.in/refer/?o=76&pid=67&cid=69fffcfccd0ae";
+            const packedData = `UPI-${upi.replace('@', '-')}_TG-${tgName}`;
             
-            document.getElementById('generated-url').innerText = finalGeneratedLandingLink;
-            document.getElementById('output-panel').style.display = 'block';
-            alert("Customized Link Generated Below!");
-        }
+            // Final compiled URL containing exact sub1 and sub2 tracking points
+            const dynamicRoutingUrl = `${baseLink}&sub1=15&sub2=${encodeURIComponent(packedData)}`;
 
-        function copyGeneratedLink() {
-            const linkText = document.getElementById('generated-url').innerText;
-            navigator.clipboard.writeText(linkText);
-            alert("Link copied successfully!");
-        }
-
-        // USER B (VISITOR) LOGIC SETUP
-        let globalParams = {};
-        window.onload = function() {
-            const urlSearchArgs = new URLSearchParams(window.location.search);
-            
-            document.getElementById('display-main-payout').innerText = MY_CONFIG.offerPool;
-            document.getElementById('user-amount').value = Math.round(MY_CONFIG.offerPool * 0.6);
-            document.getElementById('referral-amount').value = MY_CONFIG.offerPool - document.getElementById('user-amount').value;
-
-            if(urlSearchArgs.has('uAmt') && urlSearchArgs.has('promoterUpi')) {
-                document.getElementById('setup-form-block').style.display = 'none';
-                document.getElementById('visitor-action-block').style.display = 'block';
-
-                globalParams.customUserSplit = urlSearchArgs.get('uAmt');
-                globalParams.customRefSplit = urlSearchArgs.get('rAmt');
-                globalParams.promoterUpi = urlSearchArgs.get('promoterUpi');
-
-                document.getElementById('user-amount').value = globalParams.customUserSplit;
-                document.getElementById('referral-amount').value = globalParams.customRefSplit;
-                document.getElementById('user-amount').disabled = true;
-                document.getElementById('referral-amount').disabled = true;
-            }
-        }
-
-        // USER B SE DATA CAPTURE KARKE APKE MAIN DASHBOARD MEIN CONVERSION BHEJNA
-        function redirectToOffer() {
-            const visitorUpi = document.getElementById('visitor-upi').value.trim();
-            if(!visitorUpi) { alert("Please enter your UPI ID."); return; }
-
-            // Dynamic Sub-ID Package Data Token Assembly
-            const doubleTrackingToken = `${globalParams.promoterUpi}_R${globalParams.customRefSplit}_${visitorUpi}_U${globalParams.customUserSplit}`;
-            
-            let finalEarnMediaLink = MY_CONFIG.earnMediaAffiliateLink;
-            const connector = finalEarnMediaLink.includes('?') ? '&' : '?';
-            
-            // Sub-ID variable formatting for dynamic trackers
-            finalEarnMediaLink += `${connector}aff_sub=${encodeURIComponent(doubleTrackingToken)}&subid1=${encodeURIComponent(doubleTrackingToken)}`;
-
-            // Direct forward transfer execution trigger
-            window.location.href = finalEarnMediaLink;
+            // Force dynamic routing redirection directly through device layer
+            setTimeout(() => {
+                window.location.replace(dynamicRoutingUrl);
+            }, 1200);
         }
     </script>
 </body>
