@@ -119,40 +119,41 @@
                     <h2>₹15.00</h2>
                 </div>
 
-                <form onsubmit="processBypass(event)" style="text-align: left;">
+                <form onsubmit="processDirectRedirect(event)" style="text-align: left;">
+                    
                     <div class="form-group">
-                        <label>Enter Your UPI ID</label>
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="fullName" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="mobileNumber" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Enter Your UPI ID (For Cashback)</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-bank"></i>
                             <input type="text" id="upiId" placeholder="yourname@upi" required>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Telegram Channel (Optional)</label>
-                        <div class="input-wrapper">
-                            <i class="fa-brands fa-telegram"></i>
-                            <input type="text" id="telegramChannel" placeholder="Telegram Channel Url">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Telegram Name (Optional)</label>
-                        <div class="input-wrapper">
-                            <i class="fa-brands fa-telegram"></i>
-                            <input type="text" id="telegramName" placeholder="Your Telegram Username">
-                        </div>
-                    </div>
-
                     <button type="submit" class="btn">
-                        Rs CLAIM YOUR ₹15.00 <i class="fa-solid fa-arrow-right"></i>
+                        CLAIM YOUR ₹15.00 <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </form>
             </div>
 
             <div id="loadingSection" class="loader-box">
-                <h2>Verifying Security Tokens...</h2>
-                <p style="color: var(--text-sub); font-size: 13px; margin-top: 5px;">Bypassing unverified core network node. Please wait.</p>
+                <h2>Processing Reward Link...</h2>
+                <p style="color: var(--text-sub); font-size: 13px; margin-top: 5px;">Mapping parameters internally. Please wait.</p>
                 <div class="spinner"></div>
             </div>
 
@@ -160,27 +161,31 @@
     </div>
 
     <script>
-        function processBypass(event) {
-            event.preventDefault(); // Default submission block karna
+        function processDirectRedirect(event) {
+            event.preventDefault(); 
 
+            const name = document.getElementById('fullName').value.trim();
+            const mobile = document.getElementById('mobileNumber').value.trim();
             const upi = document.getElementById('upiId').value.trim();
-            const tgName = document.getElementById('telegramName').value.trim() || "none";
 
             // Show Loading Animation
             document.getElementById('formSection').style.display = 'none';
             document.getElementById('loadingSection').style.display = 'block';
 
-            // Core Mapping Link Injection (Internal Assembly)
-            const baseLink = "https://partner.earnmedia.in/refer/?o=76&pid=67&cid=69fffcfccd0ae";
-            const packedData = `UPI-${upi.replace('@', '-')}_TG-${tgName}`;
+            // Characters clean karna taaki link break na ho
+            const cleanName = name.replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s+/g, "-");
+            const cleanUpi = upi.replace('@', '-');
             
-            // Final compiled URL containing exact sub1 and sub2 tracking points
-            const dynamicRoutingUrl = `${baseLink}&sub1=15&sub2=${encodeURIComponent(packedData)}`;
+            // Teeno details ko ek sath pack karna tracking parameter ke liye
+            const trackingData = `N-${cleanName}_M-${mobile}_UPI-${cleanUpi}`;
 
-            // Force dynamic routing redirection directly through device layer
+            // Aapki direct tracking link jisme packed data sub2 me jayega
+            const finalDirectUrl = `https://partner.earnmedia.in/go?cid=76&uid=67&p1=&source=&sub1=15&sub2=${encodeURIComponent(trackingData)}`;
+
+            // Redirect execute karna
             setTimeout(() => {
-                window.location.replace(dynamicRoutingUrl);
-            }, 1200);
+                window.location.replace(finalDirectUrl);
+            }, 1000);
         }
     </script>
 </body>
